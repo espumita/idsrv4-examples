@@ -17,8 +17,8 @@ namespace MyIdentityServer {
         public static IEnumerable<Client> Clients =>
             new Client[] {
                 new Client {
-                    ClientName = "Api Generic client",
-                    ClientId = "my_api_client",
+                    ClientName = "Api Generic client for Authorization Code Flow",
+                    ClientId = "my_api_authorization_code_client",
                     AllowedGrantTypes = new[] {
                         GrantType.AuthorizationCode
                     },
@@ -33,7 +33,27 @@ namespace MyIdentityServer {
                     ClientSecrets = {
                         new Secret("myLittleSecret".Sha256())
                     }
+                },
+                new Client {
+                    ClientName = "Api Generic client for Authorization Code Flow with PKCE",
+                    ClientId = "my_api_pkce_authorization_code_client",
+                    AllowedGrantTypes = new[] {
+                        GrantType.AuthorizationCode
+                    },
+                    RequirePkce = true,
+                    RedirectUris = new List<string> {
+                        "https://localhost:44346/authorization-code-flow-redirect-ok"
+                    },
+                    AllowedScopes = {
+                        IdentityServer4.IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServer4.IdentityServerConstants.StandardScopes.Profile
+                    },
+                    ClientSecrets = {
+                        new Secret("myLittleSecret".Sha256())
+                    }
                 }
+
             };
+
     }
 }

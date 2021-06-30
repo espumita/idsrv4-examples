@@ -25,9 +25,10 @@ namespace MyAPI {
                 .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme, options => {
                     options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                     options.Authority = "https://localhost:5001/";
-                    options.ClientId = "my_api_client";
+                    //options.ClientId = "my_api_authorization_code_client";
+                    //options.UsePkce = false;
+                    options.ClientId = "my_api_pkce_authorization_code_client";
                     options.ResponseType = "code";
-                    options.UsePkce = false;
                     options.CallbackPath = new PathString("/authorization-code-flow-redirect-ok");
                     options.Scope.Add("openid");
                     options.Scope.Add("profile");
