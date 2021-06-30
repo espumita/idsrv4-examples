@@ -1,10 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using MyAPI.Models;
 
 namespace MyAPI.Controllers {
     [ApiController]
+    [Authorize]
     [Route("api/pets")]
     public class PetsController : ControllerBase {
 
@@ -15,7 +21,12 @@ namespace MyAPI.Controllers {
         }
 
         [HttpGet]
-        public IEnumerable<Pet> Get() {
+        public async Task<IEnumerable<Pet>> Get() {
+            
+            var identityToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
+
+            Debug.WriteLine($"Identity token: {identityToken}");
+
             return new List<Pet> {
                 new Pet {
                     Name = "Tigger",
