@@ -27,6 +27,10 @@ namespace MyAPI.Controllers {
 
             Debug.WriteLine($"Identity token: {identityToken}");
 
+            foreach (var claim in User.Claims) {
+                Debug.WriteLine($"Claim type: {claim.Type} - Claim value: {claim.Value}");
+            }
+
             return new List<Pet> {
                 new Pet {
                     Name = "Tigger",

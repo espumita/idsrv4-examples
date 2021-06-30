@@ -22,6 +22,7 @@ namespace MyIdentityServer {
                     AllowedGrantTypes = new[] {
                         GrantType.AuthorizationCode
                     },
+                    RequirePkce = false,
                     RedirectUris = new List<string> {
                         "https://localhost:44346/authorization-code-flow-redirect-ok"
                     },
