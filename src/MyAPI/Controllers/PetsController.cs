@@ -22,10 +22,13 @@ namespace MyAPI.Controllers {
 
         [HttpGet]
         public async Task<IEnumerable<Pet>> Get() {
-            
+
+            var accessToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+
             var identityToken = await HttpContext.GetTokenAsync(OpenIdConnectParameterNames.IdToken);
 
             Debug.WriteLine($"Identity token: {identityToken}");
+            Debug.WriteLine($"Access token: {accessToken}");
 
             foreach (var claim in User.Claims) {
                 Debug.WriteLine($"Claim type: {claim.Type} - Claim value: {claim.Value}");
